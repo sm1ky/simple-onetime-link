@@ -1,8 +1,8 @@
 import requests
 import qrcode
 
-response = requests.post('http://localhost:1684/generate-token', json={
-        'domain': 'http://localhost:1684', 
+response = requests.post('https://shorten.sm1ky.com/generate-token', json={
+        'domain': 'https://shorten.sm1ky.com', 
         'url': 'https://google.com/'
     }
 )
@@ -15,5 +15,5 @@ qr = qrcode.make(data['url'])
 qr.save("one_time_qr.png")
 print("QR code saved as one_time_qr.png")
 
-use_response = requests.get(f"http://localhost:1684/use-token/{data['token']}")
+use_response = requests.get(f"https://shorten.sm1ky.com/use-token/{data['token']}")
 print(f"Redirected to: {use_response.url}")

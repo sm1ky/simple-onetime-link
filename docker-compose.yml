@@ -2,7 +2,7 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "1684:1684"
     volumes:
       - ./db.sqlite:/app/db.sqlite
     environment:

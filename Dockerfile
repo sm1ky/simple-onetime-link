@@ -8,6 +8,4 @@ RUN pip install poetry && poetry install --no-dev
 
 COPY . .
 
-EXPOSE 5000
-
 CMD ["poetry", "run", "python", "app.py"]
