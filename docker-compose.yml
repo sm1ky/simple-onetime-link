@@ -4,6 +4,6 @@ services:
     ports:
       - "1684:1684"
     volumes:
-      - ./db.sqlite:/app/db.sqlite
+      - ./instance:/app/instance
     environment:
       FLASK_ENV: development
