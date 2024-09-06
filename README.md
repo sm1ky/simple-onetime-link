@@ -2,7 +2,7 @@
 
 This is a simple Flask-based app that generates one-time-use QR codes with tokens. After scanning, if token is invalidated, the user is redirected to a specified URL.
 
-## Public version
+## Public version | Example to use in directory tests [View](./tests/example.py) !!!
 ```url
 https://shorten.sm1ky.com/
 ```
@@ -21,12 +21,7 @@ git clone https://github.com/sm1ky/one-time-qr.git
 cd one-time-qr
 ```
 
-### 2. Install dependencies with Poetry
-```bash
-poetry intall
-```
-
-### 3. Run the application using Docker Compose
+### 2. Run the application using Docker Compose
 ```bash
 docker compose up --build
 ```
