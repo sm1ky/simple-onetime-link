@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "one-time-qr"
+version = "0.1.0"
+description = "One-time-use QR Code with Flask"
+authors = ["Artem <contant@sm1ky.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Flask = "^2.0"
+Flask-SQLAlchemy = "^3.0"
+requests = "^2.32.3"
+qrcode = "^7.4.2"
+SQLAlchemy = "^2.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

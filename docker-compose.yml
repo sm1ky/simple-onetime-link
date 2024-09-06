@@ -1,0 +1,9 @@
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./db.sqlite:/app/db.sqlite
+    environment:
+      FLASK_ENV: development
