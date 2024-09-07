@@ -7,7 +7,7 @@ server {
     server_name your-domain.com;
 
     location / {
-        proxy_pass http://127.0.0.1:1500;  
+        proxy_pass http://127.0.0.1:1684;  
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -40,5 +40,5 @@ frontend http-in
 backend flask_backend
     balance roundrobin  
     option httpchk     
-    server app1 127.0.0.1:1500 check 
+    server app1 127.0.0.1:1684 check 
 ```
