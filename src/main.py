@@ -3,11 +3,14 @@ from flask_sqlalchemy import SQLAlchemy
 import uuid
 import string 
 import random
+from flask_cors import CORS
 
 web = Flask(__name__)
 
 web.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 web.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+CORS(web)
 
 db = SQLAlchemy(web)
 
