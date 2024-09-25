@@ -31,6 +31,7 @@ def generate_random_token(length=6):
 def generate_token():
     redirect_domain = request.json.get('domain')
     base_url = request.json.get('url')
+    length = request.json.get('length')
 
     if not base_url:
         return jsonify({'message': 'Base URL is required'}), 400
@@ -42,7 +43,7 @@ def generate_token():
         return jsonify({'token': existing_token.token, 'url': one_time_url}), 200
 
     # Генерация уникального токена
-    token_str = generate_random_token()
+    token_str = generate_random_token(length=int(length))
 
     # Проверка существования токена
     while Token.query.filter_by(token=token_str).first() is not None:
