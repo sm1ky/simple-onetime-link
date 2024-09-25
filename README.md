@@ -1,16 +1,14 @@
-# One-Time QR Code Flask App
+# Short Link Flask App
 
-This is a simple Flask-based app that generates one-time-use QR codes with tokens. After scanning, if token is invalidated, the user is redirected to a specified URL.
+This is a simple Flask-based app that generates short link. After use, if token is invalidated, the user is redirected to a specified URL.
 
 ## Public version
 ```url
-https://shorten.sm1ky.com/
+None
 ```
 
 ## Features
-- Generates one-time-use tokens
-- Redirects users after scanning the QR code
-- Invalidates tokens after first use
+- Generates tokens
 - Docker and Poetry integration for easy setup
 
 ## Setup Instructions

@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify, redirect
 from flask_sqlalchemy import SQLAlchemy
 import uuid
+import string 
+import random
 
 web = Flask(__name__)
 
@@ -17,17 +19,29 @@ class Token(db.Model):
 
 with web.app_context():
     db.create_all()
+    
+def generate_random_token(length=6):
+    characters = string.ascii_letters + string.digits  
+    return ''.join(random.choice(characters) for _ in range(length))
 
 @web.route('/generate-token', methods=['POST'])
 def generate_token():
-    token_str = str(uuid.uuid4())
     redirect_domain = request.json.get('domain')
     base_url = request.json.get('url')
 
     if not base_url:
         return jsonify({'message': 'Base URL is required'}), 400
 
-    one_time_url = f"{redirect_domain}/use-token/{token_str}"
+    # Генерация уникального токена
+    token_str = generate_random_token()
+
+    # Проверка существования токена
+    while Token.query.filter_by(token=token_str).first() is not None:
+        token_str = generate_random_token()
+
+    one_time_url = f"{redirect_domain}/{token_str}"
+    
+    # Создание нового токена
     token = Token(token=token_str, url=base_url)
     
     db.session.add(token)
@@ -35,18 +49,15 @@ def generate_token():
 
     return jsonify({'token': token_str, 'url': one_time_url}), 201
 
-@web.route('/use-token/<token>', methods=['GET'])
+@web.route('/<token>', methods=['GET'])
 def use_token(token):
     token_entry = Token.query.filter_by(token=token).first()
 
     if not token_entry:
         return jsonify({'message': 'Invalid token'}), 404
 
-    if token_entry.used:
-        return jsonify({'message': 'Token already used'}), 400
-
-    # Отметка токена как использованного
-    token_entry.used = True
-    db.session.commit()
+    if not token_entry.used:
+        token_entry.used = True
+        db.session.commit()
 
     return redirect(token_entry.url, code=302)
