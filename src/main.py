@@ -31,7 +31,7 @@ def generate_random_token(length=6):
 def generate_token():
     redirect_domain = request.json.get('domain')
     base_url = request.json.get('url')
-    length = request.json.get('length')
+    length = request.json.get('length', 6)
 
     if not base_url:
         return jsonify({'message': 'Base URL is required'}), 400

@@ -7,6 +7,10 @@ This is a simple Flask-based app that generates short link. After use, if token 
 None
 ```
 
+## Example usage: 
+- [English](example_use_en.md)
+- [Русский](example_use_ru.md)
+
 ## Features
 - Generates tokens
 - Docker and Poetry integration for easy setup
