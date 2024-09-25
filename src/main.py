@@ -35,6 +35,12 @@ def generate_token():
     if not base_url:
         return jsonify({'message': 'Base URL is required'}), 400
 
+    # Проверка, существует ли уже токен для этого URL
+    existing_token = Token.query.filter_by(url=base_url).first()
+    if existing_token:
+        one_time_url = f"{redirect_domain}/{existing_token.token}"
+        return jsonify({'token': existing_token.token, 'url': one_time_url}), 200
+
     # Генерация уникального токена
     token_str = generate_random_token()
 
@@ -43,10 +49,9 @@ def generate_token():
         token_str = generate_random_token()
 
     one_time_url = f"{redirect_domain}/{token_str}"
-    
+
     # Создание нового токена
     token = Token(token=token_str, url=base_url)
-    
     db.session.add(token)
     db.session.commit()
 
