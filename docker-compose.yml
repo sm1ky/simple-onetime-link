@@ -7,3 +7,4 @@ services:
       - ./instance:/app/instance
     environment:
       FLASK_ENV: development
+    restart: always
